@@ -1936,8 +1936,13 @@ class Dataface_Record {
 						$this->_transientValues[$fieldname] = $out;
 					} else {
 
-						if ( isset($delegate) and  method_exists($delegate, $fieldname.'__init') ){
-							$methodname = $fieldname.'__init';
+						// Also check with method_exists and is_callable with $methodname, because we call it later
+						$methodname = $fieldname.'__init';
+						if (( isset($delegate) and  method_exists($delegate, $methodname) )
+						      OR ( is_callable(array($delegate, $methodname)) && isset($delegate->{$methodname}) && 
+						 	        get_class($delegate->{$methodname}) && ($delegate->{$methodname} instanceof Closure) ) // check if we dynamically extended
+						    ) {
+						// / JOE FIX
 							$out = $delegate->$methodname($this);
 							if ( isset($out) ){
 								$this->_transientValues[$fieldname] = $out;
@@ -1976,8 +1981,9 @@ class Dataface_Record {
 						}
 
 
-
-						$out = null;
+						// JOE FIX 
+						//// $out = null; // don't throw away $out
+						// /JOE FIX
 					}
 
 				} else if ( ( $parent =& $this->getParentRecord() ) and $parent->_table->hasField($fieldname) ){
