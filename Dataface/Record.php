@@ -1942,7 +1942,6 @@ class Dataface_Record {
 						      OR ( is_callable(array($delegate, $methodname)) && isset($delegate->{$methodname}) && 
 						 	        get_class($delegate->{$methodname}) && ($delegate->{$methodname} instanceof Closure) ) // check if we dynamically extended
 						    ) {
-						// / JOE FIX
 							$out = $delegate->$methodname($this);
 							if ( isset($out) ){
 								$this->_transientValues[$fieldname] = $out;
