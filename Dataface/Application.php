@@ -2475,7 +2475,18 @@ END
 	 			<li><a href="'.htmlspecialchars($this->url('').'&--refresh-apc=1').'">Refresh the APC Cache.</a> - This may help in cases where you have changed a table column definition and your server has the APC opcode cache installed.</li>
 	 			<li><a href="'.htmlspecialchars($this->url('-action=clear_views')).'">Clear Cache Views</a> - This may also help in cases where you have changed a table column definition and some tables include __sql__ definitions.</li>
 	 			<li>Check your PHP error log for a description of the error and go from there.  See <a href="http://xataface.com/wiki/Troubleshooting">this page</a> for troubleshooting tips.</li>
-	 			</ol>';
+				 </ol>';
+			
+			// JOE FIX:
+			/**
+			 * We want to see crash causes while still rolling out new features
+			 */
+			 echo 	"<p>Exception</p>
+					<p>".$ex->getMessage()."</p>
+					</br>"
+					//<p>".$ex->getTrace()."</p>"
+					;
+			// /JOE FIX
 	 		  
 			throw $ex;
 			
