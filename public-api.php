@@ -62,6 +62,12 @@ function df_init($site_path, $dataface_url, $conf=null){
 			throw new Exception($res->getMessage(), E_USER_ERROR);
 		}
 	}
+	// JOE FIX
+	// I need to know that an Instance of Dataface_Application exists
+	if ( !defined( 'DATAFACE_PUBLIC_API_INITIALIZED' ) ){
+	define('DATAFACE_PUBLIC_API_INITIALIZED', true);
+	}
+	// JOE FIX
 	return $app;
 
 }
