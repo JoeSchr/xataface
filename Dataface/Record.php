@@ -1978,11 +1978,6 @@ class Dataface_Record {
 								$this->_transientValues[$fieldname] = $out;
 							}
 						}
-
-
-						// JOE FIX 
-						//// $out = null; // don't throw away $out
-						// /JOE FIX
 					}
 
 				} else if ( ( $parent =& $this->getParentRecord() ) and $parent->_table->hasField($fieldname) ){
